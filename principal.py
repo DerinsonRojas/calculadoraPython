@@ -36,11 +36,6 @@ def botonPresionado(num):
     elif numeroPantalla.get()!='0':
         numeroPantalla.set(numeroPantalla.get()+num)    
 
-        
-
-
-    numComas=numeroPantalla.get().count(',')
-    print(numComas)
 
 #--------------Pantalla-----------------------
 pantalla=Entry(miFrame, textvariable=numeroPantalla)
