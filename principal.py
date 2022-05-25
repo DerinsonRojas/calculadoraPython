@@ -37,6 +37,7 @@ boton3=Button(miFrame,text='3',width=3)
 boton3.grid(row=4,column=3)
 botonRest=Button(miFrame,text='-',width=3)
 botonRest.grid(row=4,column=4)
+
 #--------------Fila 4---------------------------
 botonComa=Button(miFrame,text=',',width=3)
 botonComa.grid(row=5,column=1)
@@ -46,6 +47,7 @@ botonIgual=Button(miFrame,text='=',width=3)
 botonIgual.grid(row=5,column=3)
 botonSuma=Button(miFrame,text='+',width=3)
 botonSuma.grid(row=5,column=4)
+
 #--------------Fila 5--------------------------
 botonBorrarUltimo=Button(miFrame,text='<-',width=3)
 botonBorrarUltimo.grid(row=6,column=1)
@@ -55,6 +57,8 @@ botonSigno=Button(miFrame,text='+/-',width=3)
 botonSigno.grid(row=6,column=3)
 botonPorcentaje=Button(miFrame,text='%',width=3)
 botonPorcentaje.grid(row=6,column=4)
+
+pritn("-----------------------Funciones de Botones-----------------------------")
 
 
 
