@@ -58,7 +58,7 @@ botonSigno.grid(row=6,column=3)
 botonPorcentaje=Button(miFrame,text='%',width=3)
 botonPorcentaje.grid(row=6,column=4)
 
-pritn("-----------------------Funciones de Botones-----------------------------")
+print("-----------------------Funciones de Botones-----------------------------")
 
 
 
