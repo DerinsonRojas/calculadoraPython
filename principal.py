@@ -17,10 +17,7 @@ def borrarPantalla():
 
 
 def botonPresionado(num):
-    numComas=0
 
-
-    
     if  num==',' and numeroPantalla.get()=='0':
         numeroPantalla.set('0'+num)
 
