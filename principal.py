@@ -1,6 +1,8 @@
 from tkinter import *
-print("Hola mundo")
-root=Tk()
+
+raiz=Tk()
+miFrame=Frame(raiz)
+miFrame.pack()
 
 
 
@@ -21,6 +23,4 @@ root=Tk()
 
 
 
-
-
-root.mainloop()
+raiz.mainloop()
