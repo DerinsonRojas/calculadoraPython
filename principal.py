@@ -4,18 +4,46 @@ raiz=Tk()
 
 miFrame=Frame(raiz)
 miFrame.pack()
-numeroPresionado=StringVar()
+numeroPantalla=StringVar()
 
 print("-----------------------Funciones de Botones-----------------------------")
 
-def botonPresionado(num):
-    numeroPresionado.set(numeroPresionado.get()+num)
+while numeroPantalla.get()=='':
+    numeroPantalla.set('0')
 
 def borrarPantalla():
-    numeroPresionado.set('0')
+    numeroPantalla.set('0')
+
+
+
+def botonPresionado(num):
+    numComas=0
+
+
+    
+    if  num==',' and numeroPantalla.get()=='0':
+        numeroPantalla.set('0'+num)
+
+    elif ',' in numeroPantalla.get() and num==',':
+        numeroPantalla.set(numeroPantalla.get())
+
+    elif numeroPantalla.get()=='0,' and num==',':
+        numeroPantalla.set('0'+num)
+
+    elif numeroPantalla.get()=='0':
+        numeroPantalla.set(num)
+
+    elif numeroPantalla.get()!='0':
+        numeroPantalla.set(numeroPantalla.get()+num)    
+
+        
+
+
+    numComas=numeroPantalla.get().count(',')
+    print(numComas)
 
 #--------------Pantalla-----------------------
-pantalla=Entry(miFrame, textvariable=numeroPresionado)
+pantalla=Entry(miFrame, textvariable=numeroPantalla)
 pantalla.grid(row=1,column=1,padx=10,pady=10, columnspan=4)
 pantalla.config(fg="#4D1906", justify="right")
 
