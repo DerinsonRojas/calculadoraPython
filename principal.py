@@ -1,9 +1,11 @@
 from tkinter import *
-from unittest import result
+
 
 raiz=Tk()
+raiz.config(padx=80, pady=80, background="green" )
 
 miFrame=Frame(raiz)
+
 miFrame.pack()
 numeroPantalla=StringVar()
 operacion=''
@@ -11,10 +13,11 @@ resultado=0
 resultadoMultiplicacion=1
 resultadoResta=0
 
+
 indicadorDeOperacion=''
 print("-----------------------Inicio de la calculadora-----------------------------")
 
-while numeroPantalla.get()=='':
+if numeroPantalla.get()=='':
     numeroPantalla.set('0')
 
 #---------Funcion el resultado-----------------------
@@ -137,16 +140,13 @@ def resta(num):
 
     indicadorDeOperacion='r'
 
-    if resultado==0:
-        
-        resultado=float(num)-resultado
-    
-    elif resultado>0:
-        resultado=resultado-float(num)
-    
-    elif resultado<0:
-        resultado=resultado-float(num)
+    num2=float(num)
 
+    if resultado==0:
+        resultado=num2-resultado
+
+    else:
+        resultado=resultado-num2
 
     numeroPantalla.set(resultado)
 
@@ -191,6 +191,23 @@ def division(num):
 
     except ZeroDivisionError:
         numeroPantalla.set("NoDivEntreCero")
+
+def cambiaSigno(num):
+    if num=='0' or num=='0.0':
+        return '0'
+    if num!='0':
+        numeroNuevo=-1*float(num)
+        str(numeroNuevo)
+        numeroPantalla.set(numeroNuevo)
+
+def borraUltimo(num):
+    if num!=[]:
+        numeroPantalla.set(num[:-1])
+    if numeroPantalla.get()==[]:
+        numeroPantalla.set('0')
+    print(numeroPantalla.get())
+
+
 
 #--------------Pantalla-----------------------
 pantalla=Entry(miFrame, textvariable=numeroPantalla)
@@ -238,11 +255,11 @@ botonSuma=Button(miFrame,text='+',width=3, command=lambda:suma(numeroPantalla.ge
 botonSuma.grid(row=5,column=4)
 
 #--------------Fila 5--------------------------
-botonBorrarUltimo=Button(miFrame,text='<-',width=3, command=lambda:botonPresionado('borrar el ultimo numero del entri'))
+botonBorrarUltimo=Button(miFrame,text='<-',width=3, command=lambda:botonPresionado(borraUltimo(numeroPantalla.get())))
 botonBorrarUltimo.grid(row=6,column=1)
 botonBorrar=Button(miFrame,text='CE',width=3, command=borrarPantalla)
 botonBorrar.grid(row=6,column=2)
-botonSigno=Button(miFrame,text='+/-',width=3, command=lambda:botonPresionado('cambiar signo'))
+botonSigno=Button(miFrame,text='+/-',width=3, command=lambda:botonPresionado(cambiaSigno(numeroPantalla.get())))
 botonSigno.grid(row=6,column=3)
 botonPorcentaje=Button(miFrame,text='%',width=3, command=lambda:botonPresionado('calcula porcentaje'))
 botonPorcentaje.grid(row=6,column=4)
