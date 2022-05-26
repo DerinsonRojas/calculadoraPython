@@ -105,9 +105,7 @@ def botonPresionado(num):
             numeroPantalla.set(num)
 
         elif numeroPantalla.get()!='0':
-            numeroPantalla.set(numeroPantalla.get()+num)
-
-
+            numeroPantalla.set(numeroPantalla.get()+str(num))
 
 #----------------Operaciones aritmeticas---------
 def suma(num):
@@ -162,7 +160,7 @@ def multiplicacion(num):
     resultadoMultiplicacion*=float(num)
     
     numeroPantalla.set(resultadoMultiplicacion)
-
+#Falta arreglar la vivision entre cero cuando no se agrega nada a la calculadora
 def division(num):
     global operacion
 
@@ -176,9 +174,6 @@ def division(num):
 
     indicadorDeOperacion='d'
     
-    if num=='0':
-        print("Esto es lo que hay dentro de num",num)
-
     try:
         if float(num)==0:
             resultado=float(num)/resultadoMultiplicacion
@@ -197,17 +192,17 @@ def cambiaSigno(num):
         return '0'
     if num!='0':
         numeroNuevo=-1*float(num)
-        str(numeroNuevo)
-        numeroPantalla.set(numeroNuevo)
+        a=str(numeroNuevo)
+        numeroPantalla.set(a)
+        return ''
+#Mejorar el borrado de numeros
+def borrarUltimo(num):
 
-def borraUltimo(num):
-    if num!=[]:
-        numeroPantalla.set(num[:-1])
-    if numeroPantalla.get()==[]:
-        numeroPantalla.set('0')
-    print(numeroPantalla.get())
+    a=num[:-1]
+    str(a)
+    numeroPantalla.set(a)
 
-
+    return ''
 
 #--------------Pantalla-----------------------
 pantalla=Entry(miFrame, textvariable=numeroPantalla)
@@ -245,25 +240,22 @@ botonRest=Button(miFrame,text='-',width=3, command=lambda:resta(numeroPantalla.g
 botonRest.grid(row=4,column=4)
 
 #--------------Fila 4---------------------------
-botonComa=Button(miFrame,text=',',width=3, command=lambda:botonPresionado(','))
+botonComa=Button(miFrame,text='.',width=3, command=lambda:botonPresionado('.'))
 botonComa.grid(row=5,column=1)
 boton0=Button(miFrame,text='0',width=3, command=lambda:botonPresionado('0'))
 boton0.grid(row=5,column=2)
-botonIgual=Button(miFrame,text='=',width=3, command=lambda:botonPresionado(operacionResultado()))
-botonIgual.grid(row=5,column=3)
+botonCambiaSigno=Button(miFrame,text='+/-',width=3, command=lambda:botonPresionado(cambiaSigno(numeroPantalla.get())))
+botonCambiaSigno.grid(row=5,column=3)
 botonSuma=Button(miFrame,text='+',width=3, command=lambda:suma(numeroPantalla.get()))
 botonSuma.grid(row=5,column=4)
 
 #--------------Fila 5--------------------------
-botonBorrarUltimo=Button(miFrame,text='<-',width=3, command=lambda:botonPresionado(borraUltimo(numeroPantalla.get())))
+botonBorrarUltimo=Button(miFrame,text='<-',width=3, command=lambda:botonPresionado(borrarUltimo(numeroPantalla.get())))
 botonBorrarUltimo.grid(row=6,column=1)
 botonBorrar=Button(miFrame,text='CE',width=3, command=borrarPantalla)
 botonBorrar.grid(row=6,column=2)
-botonSigno=Button(miFrame,text='+/-',width=3, command=lambda:botonPresionado(cambiaSigno(numeroPantalla.get())))
-botonSigno.grid(row=6,column=3)
-botonPorcentaje=Button(miFrame,text='%',width=3, command=lambda:botonPresionado('calcula porcentaje'))
-botonPorcentaje.grid(row=6,column=4)
-
+botonIgual=Button(miFrame,text='=',width=3, command=lambda:botonPresionado(operacionResultado()))
+botonIgual.grid(row=6,column=4, ipadx=10)
 
 
 raiz.mainloop()
