@@ -10,10 +10,66 @@ operacion=''
 resultado=0
 resultadoMultiplicacion=1
 resultadoResta=0
-print("-----------------------Funciones de Botones-----------------------------")
+
+indicadorDeOperacion=''
+print("-----------------------Inicio de la calculadora-----------------------------")
 
 while numeroPantalla.get()=='':
     numeroPantalla.set('0')
+
+#---------Funcion el resultado-----------------------
+
+def operacionResultado():
+    global resultado
+    
+    global operacion
+
+    global indicadorDeOperacion
+
+    global resultadoMultiplicacion
+
+
+
+    print("observando al indicador de operacion: ", indicadorDeOperacion)
+    if numeroPantalla.get()=='0' and resultado ==0:
+        return '0'
+
+
+    if numeroPantalla.get()=='':
+        return '0'
+    if indicadorDeOperacion=='s':
+        #print("Resultado: ",type(resultado))
+        #print("Numero en pantalla: ",type(numeroPantalla.get()))
+        a=float(numeroPantalla.get())#Lineas del codigo
+        #print("tipo de dato de a: ",type(a))
+        numeroPantalla.set(resultado+a)#Lineas del codigo
+        indicadorDeOperacion=''
+
+    elif indicadorDeOperacion=='r':
+        a=float(numeroPantalla.get())#Lineas del codigo
+        numeroPantalla.set(resultado-a)#Lineas del codigo
+        indicadorDeOperacion=''
+    
+    elif indicadorDeOperacion=='m':
+        a=float(numeroPantalla.get())#Lineas del codigo
+        numeroPantalla.set(resultadoMultiplicacion*a)#Lineas del codigo
+        indicadorDeOperacion=''
+    
+    elif indicadorDeOperacion=='d':
+        a=float(numeroPantalla.get())#Lineas del codigo
+        try:
+            numeroPantalla.set(resultado/a)#Lineas del codigo
+        
+        except:
+            numeroPantalla.set('NoDivEntreCero')
+        
+        indicadorDeOperacion=''
+    
+
+    resultadoMultiplicacion=1
+    resultado=0
+
+    return ""
 
 def borrarPantalla():
     global resultado 
@@ -47,19 +103,13 @@ def botonPresionado(num):
 
         elif numeroPantalla.get()!='0':
             numeroPantalla.set(numeroPantalla.get()+num)
-#---------Funcion el resultado-----------------------
-
-def operacionResultado():
-    global resultado
-
-    global operacion
-
-    numeroPantalla.set(resultado+int(numeroPantalla.get()))
 
 
-    resultado=0
+
 #----------------Operaciones aritmeticas---------
 def suma(num):
+
+    global indicadorDeOperacion
     global operacion
 
     global resultado
@@ -68,10 +118,10 @@ def suma(num):
 
     resultadoMultiplicacion=1
 
-    resultado+=int(num)
+    resultado+=float(num)
 
     operacion='suma'
-
+    indicadorDeOperacion='s'
     numeroPantalla.set(resultado)
 
 def resta(num):
@@ -81,31 +131,66 @@ def resta(num):
 
     global resultadoResta
 
+    global indicadorDeOperacion
+
     operacion='resta'
+
+    indicadorDeOperacion='r'
 
     if resultado==0:
         
-        resultado=int(num)-resultado
+        resultado=float(num)-resultado
     
     elif resultado>0:
-        resultado=resultado-int(num)
+        resultado=resultado-float(num)
     
     elif resultado<0:
-        resultado=resultado-int(num)
+        resultado=resultado-float(num)
 
 
     numeroPantalla.set(resultado)
 
 def multiplicacion(num):
     global operacion
+    global indicadorDeOperacion
+    global resultadoMultiplicacion
+    
+    operacion='multiplicacion'
+
+    indicadorDeOperacion='m'
+
+    resultadoMultiplicacion*=float(num)
+    
+    numeroPantalla.set(resultadoMultiplicacion)
+
+def division(num):
+    global operacion
+
+    global indicadorDeOperacion
+
+    global resultado
 
     global resultadoMultiplicacion
 
-    operacion='multiplicacion'
+    operacion='division'
 
-    resultadoMultiplicacion*=int(num)
+    indicadorDeOperacion='d'
     
-    numeroPantalla.set(resultadoMultiplicacion)
+    if num=='0':
+        print("Esto es lo que hay dentro de num",num)
+
+    try:
+        if float(num)==0:
+            resultado=float(num)/resultadoMultiplicacion
+        if resultado==0 and float(num)!=0:
+            resultado=float(num)/resultadoMultiplicacion
+        elif resultado!=0:
+            resultado=resultado/float(num)
+
+        numeroPantalla.set(resultado)
+
+    except ZeroDivisionError:
+        numeroPantalla.set("NoDivEntreCero")
 
 #--------------Pantalla-----------------------
 pantalla=Entry(miFrame, textvariable=numeroPantalla)
@@ -119,7 +204,7 @@ boton8=Button(miFrame,text='8',width=3, command=lambda:botonPresionado('8'))
 boton8.grid(row=2,column=2)
 boton9=Button(miFrame,text='9',width=3, command=lambda:botonPresionado('9'))
 boton9.grid(row=2,column=3)
-botonDiv=Button(miFrame,text='/',width=3, command=lambda:botonPresionado('indicar división'))
+botonDiv=Button(miFrame,text='/',width=3, command=lambda:division(numeroPantalla.get()))
 botonDiv.grid(row=2,column=4)
 
 #--------------Fila 2---------------------------
