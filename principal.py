@@ -2,7 +2,7 @@ from tkinter import *
 
 
 raiz=Tk()
-raiz.config(padx=80, pady=80, background="green" )
+raiz.config(padx=30, pady=30, background="green" )
 
 miFrame=Frame(raiz)
 
